@@ -5,7 +5,7 @@ The objective of the analysis is to determine if there is any bias in reviews wh
 ### Resources:
 * PySpark 3.2.1,
 * PostgreSQL, 
-* pgAdmin hosted on AWS , Pandas Library, Psycopg2 Library
+* pgAdmin hosted on AWS
 ### Steps Followed to Obtain Result:
 1. In order to properly process and analyze the review data, I have created a database schema within AWS to load the data.
 2. Selected targetted reviews from [Amazon Review Datasets](https://s3.amazonaws.com/amazon-reviews-pds/tsv/index.txt), Automobile Sector.
