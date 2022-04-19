@@ -1,0 +1,95 @@
+CREATE TABLE review_id_table (
+  review_id TEXT PRIMARY KEY NOT NULL,
+  customer_id INTEGER,
+  product_id TEXT,
+  product_parent INTEGER,
+  review_date DATE -- this should be in the formate yyyy-mm-dd
+);
+
+-- This table will contain only unique values
+CREATE TABLE products_table (
+  product_id TEXT PRIMARY KEY NOT NULL ,
+  product_title TEXT
+);
+
+-- Customer table for first data set
+CREATE TABLE customers_table (
+  customer_id INT PRIMARY KEY NOT NULL UNIQUE,
+  customer_count INT
+);
+
+-- vine table
+CREATE TABLE vine_table (
+  review_id TEXT PRIMARY KEY,
+  star_rating INTEGER,
+  helpful_votes INTEGER,
+  total_votes INTEGER,
+  vine TEXT,
+  verified_purchase TEXT
+);
+
+--checking data for all uploaded tables
+select * from review_id_table limit 100;
+select * from products_table limit 100;
+select * from customers_table limit 100;
+select * from vine_table limit 100;
+
+
+--verifying total number of rows uploaded
+select count(customer_id) from customers_table
+
+--total_votes count is equal to or greater than 20 to pick reviews that are more likely to be helpful
+Select * 
+into vine from vine_table where total_votes >=20 ;
+select * from vine limit 100;
+
+
+--table to retrieve all the rows where the number of helpful_votes divided by total_votes is equal to or greater than 50%.
+SELECT * 
+INTO vote FROM vine WHERE CAST (helpful_votes AS FLOAT)/CAST(total_votes AS FLOAT) >=.5;
+SELECT * FROM vote;
+--DROP TABLE vine_vote;
+
+--new table that retrieves all the rows where a review was written as part of the Vine program (paid)
+SELECT * 
+INTO vine_vote FROM vote WHERE vine='Y' ;
+SELECT * FROM vine_vote;
+
+--retrieve all the rows where the review was not part of the Vine program (unpaid)
+SELECT * 
+INTO real_vote FROM vote WHERE vine='N';
+SELECT * FROM real_vote;
+
+--Determine the total number of reviews, the number of 5-star reviews, and the percentage of 5-star reviews for the two types of review (paid vs unpaid).
+--summary by vine ratings
+SELECT star_rating AS star_ratings, COUNT(total_votes) AS vine INTO ratings_vine from vine_vote
+GROUP BY star_ratings
+ORDER BY star_ratings DESC;
+SELECT * FROM ratings_vine;
+
+--summary by non_vine ratings
+SELECT star_rating AS star_ratings, COUNT(total_votes) AS non_vine INTO ratings_real from real_vote
+GROUP BY star_ratings
+ORDER BY star_ratings DESC;
+SELECT * FROM ratings_real;
+
+--Comparison between vine rating and non-vine rating by STARS
+SELECT v.star_ratings, vine, non_vine, CAST((vine*100)AS FLOAT)/CAST((vine+non_vine) AS FLOAT) AS paid_percentage, 
+CAST((non_vine*100)AS FLOAT)/CAST((vine+non_vine) AS FLOAT) AS unpaid_percentage
+FROM ratings_vine v, ratings_real r
+WHERE v.star_ratings = r.star_ratings
+ORDER BY star_ratings DESC;
+
+--Total Number of paid vs unpaid reviews
+SELECT SUM (vine) AS total_paid_ratings, SUM (non_vine) total_unpaid_ratings, (sum(vine)*100)/(sum(vine)+sum(non_vine)) as total_paid_percentage,
+(sum(non_vine)*100)/(sum(vine)+sum(non_vine)) as total_unpaid_percentage
+FROM ratings_vine v, ratings_real r
+WHERE v.star_ratings = r.star_ratings
+
+
+
+
+
+
+
+
