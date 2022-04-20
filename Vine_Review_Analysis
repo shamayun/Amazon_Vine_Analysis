@@ -73,20 +73,28 @@ GROUP BY star_ratings
 ORDER BY star_ratings DESC;
 SELECT * FROM ratings_real;
 
+--Total Number of paid vs unpaid reviews
+SELECT SUM (vine) AS total_paid_ratings, SUM (non_vine) total_unpaid_ratings, (sum(vine)*100)/(sum(vine)+sum(non_vine)) as total_paid_percentage,
+(sum(non_vine)*100)/(sum(vine)+sum(non_vine)) as total_unpaid_percentage
+INTO total_num
+FROM ratings_vine v, ratings_real r
+WHERE v.star_ratings = r.star_ratings;
+SELECT * FROM total_num;
+
 --Comparison between vine rating and non-vine rating by STARS
+SELECT v.star_ratings, vine, non_vine, CAST((vine*100)AS FLOAT)/CAST((n.total_paid_ratings) AS FLOAT) AS paid_percentage, 
+CAST((non_vine*100)AS FLOAT)/CAST((n.total_unpaid_ratings) AS FLOAT) AS unpaid_percentage
+FROM ratings_vine v, ratings_real r, total_num n
+WHERE v.star_ratings = r.star_ratings
+ORDER BY star_ratings DESC;
+
+
+/*--Comparison between vine rating and non-vine rating by STARS
 SELECT v.star_ratings, vine, non_vine, CAST((vine*100)AS FLOAT)/CAST((vine+non_vine) AS FLOAT) AS paid_percentage, 
 CAST((non_vine*100)AS FLOAT)/CAST((vine+non_vine) AS FLOAT) AS unpaid_percentage
 FROM ratings_vine v, ratings_real r
 WHERE v.star_ratings = r.star_ratings
 ORDER BY star_ratings DESC;
-
---Total Number of paid vs unpaid reviews
-SELECT SUM (vine) AS total_paid_ratings, SUM (non_vine) total_unpaid_ratings, (sum(vine)*100)/(sum(vine)+sum(non_vine)) as total_paid_percentage,
-(sum(non_vine)*100)/(sum(vine)+sum(non_vine)) as total_unpaid_percentage
-FROM ratings_vine v, ratings_real r
-WHERE v.star_ratings = r.star_ratings
-
-
 
 
 
