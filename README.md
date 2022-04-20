@@ -28,6 +28,8 @@ Total number of vine reviews in automobile were 82 out of 24,824 which is less t
 
 Based on the numbers in the summary table, I can conclude that there is no evidence of positivity bias for 5 start reviews in the Vine program in automobile market. The non-vine customers tend to leave even more reviews with high rating. 
 
+**Additional Analysis:**
+
 According to the results, non-vine customers more often rate a product with only 1 star (20% as apposed to 4%). So, I can conclude that non-vine customers tend to weigh mostly intwo categories, 1 star or 5 stars, while vine customers try to evaluate a product fairly. They often leave 3 or 4 stars reviews. Non-vine customers do not hesitate to rate one star when needed.
 
 ![Rating_comparison ](https://user-images.githubusercontent.com/96354508/164110716-08d1fa84-2ff6-439e-b647-2230636b1a9e.png)
