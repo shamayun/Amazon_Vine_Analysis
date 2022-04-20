@@ -1,6 +1,6 @@
 # Amazon Vine Analysis
 ### Overview of the analysis of the Vine program:
-Amazon offers Vine members free products that have been submitted to the program by participating selling partners. Vine reviews are the independent opinions of the Vine Voices and the selling partners cannot influence, modify, or edit the reviews. Amazon does not modify or edit Amazon Vine reviews, as long as they comply with our posting guidelines.Amazon Vine program is a service that allows manufacturers and publishers to receive reviews for their products.
+Amazon offers Vine members free products that have been submitted to the program by participating selling partners. Vine reviews are the independent opinions of the Vine Voices and the selling partners cannot influence, modify, or edit the reviews. Amazon does not modify or edit Amazon Vine reviews, as long as they comply with Amazon's posting guidelines.Amazon Vine program is a service that allows manufacturers and publishers to receive reviews for their products.
 The objective of the analysis is to determine if there is any bias in reviews which were written as part of the Amazon Vine program.
 ### Resources:
 * PySpark 3.2.1,
@@ -24,7 +24,7 @@ Total number of vine reviews in automobile were 82 out of 24,824 which is less t
 * Vine Vs non-Vine Reviews by Stars (Number & Percentage:
 33 out of 82 vine reviews were 5 stars, 40% of total vine reviews. 12,807 out of 24,824 non-vine reviews were 5 stars, 52% of total reviews.
 
-![reviews_by_stars](https://user-images.githubusercontent.com/96354508/164105616-563d5d8b-f44a-4142-a7f8-c71a0923526c.png)
+![summary of ratings](https://user-images.githubusercontent.com/96354508/164266244-7d4902fa-f18c-4133-a720-4a2240fc2ada.png)
 
 Based on the numbers in the summary table, I can conclude that there is no evidence of positivity bias for 5 start reviews in the Vine program in automobile market. The non-vine customers tend to leave even more reviews with high rating. 
 
